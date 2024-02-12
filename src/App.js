@@ -9,13 +9,21 @@ function btnNo() {
   let noBtn = document.querySelector(".btn-no");
   let yesBtn = document.querySelector(".btn-yes");
 
-  if (NoCounter >= 10) {
+  if (NoCounter === 10) {
+    NoCounter++;
+
     let computedStyle = window.getComputedStyle(yesBtn);
     let bgColor = computedStyle.getPropertyValue("background-color");
     noBtn.style.backgroundColor = bgColor;
     noBtn.style.borderColor = bgColor;
 
     noBtn.textContent = "Yes";
+  } else if (NoCounter === 11) {
+    let AfterAnswer = document.querySelector(".AfterAnswer");
+    let BeforeAnswer = document.querySelector(".BeforeAnswer");
+
+    BeforeAnswer.style.display = "none";
+    AfterAnswer.style.display = "flex";
   } else {
     NoCounter++;
     let currentWidth = parseFloat(window.getComputedStyle(yesBtn).width);
@@ -43,25 +51,32 @@ function btnNo() {
   }
 }
 function btnYes() {
-  let yesBtn = document.querySelector(".btn-yes");
-  let noBtn = document.querySelector(".btn-no");
-  let computedStyle = window.getComputedStyle(yesBtn);
-  let bgColor = computedStyle.getPropertyValue("background-color");
-  noBtn.style.backgroundColor = bgColor;
+  let AfterAnswer = document.querySelector(".AfterAnswer");
+  let BeforeAnswer = document.querySelector(".BeforeAnswer");
+
+  BeforeAnswer.style.display = "none";
+  AfterAnswer.style.display = "flex";
 }
 
 function App() {
   return (
     <div className="App">
-      <h1>Dear Masha will you be my Valentine?</h1>
-      <br />
-      <img src={cat} alt="CatWithRose" className="Cat" />
-      <button className="btn-yes btn btn-success btn-lg" onClick={btnYes}>
-        Yes
-      </button>
-      <button className="btn-no btn btn-danger btn-lg" onClick={btnNo}>
-        No
-      </button>
+      <div className="BeforeAnswer">
+        <h1>Dear Masha will you be my Valentine?</h1>
+        <br />
+        <img src={cat} alt="CatWithRose" className="Cat" />
+        <button className="btn-yes btn btn-success btn-lg" onClick={btnYes}>
+          Yes
+        </button>
+        <button className="btn-no btn btn-danger btn-lg" onClick={btnNo}>
+          No
+        </button>
+      </div>
+      <div className="AfterAnswer">
+        <p className="h1">I have little bit of server problem</p>
+        <br />
+        <p className="h1">Soooo can you send me your answer?</p>
+      </div>
     </div>
   );
 }
